@@ -1,1 +1,136 @@
 
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <meta name="theme-color" content="#090b16">
+  <title>RUNEX GAME</title>
+  <link rel="stylesheet" href="./css/style.css">
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+</head>
+<body>
+  <div class="app">
+    <header class="topbar">
+      <a class="brand" href="#" data-page="home">
+        <span class="brand-mark">R</span>
+        <span>RUNEX<span class="brand-light"> GAME</span></span>
+      </a>
+      <div class="balance"><span class="coin">R</span><span id="balance">1000</span><small>DEMO</small></div>
+    </header>
+
+    <main>
+      <section class="page active" id="page-home">
+        <div class="hero">
+          <div class="hero-glow"></div>
+          <span class="eyebrow">YOUR GAME. YOUR RULES.</span>
+          <h1>Играй на<br><span>RUNEX</span></h1>
+          <p>Проверь удачу в игровых режимах.</p>
+          <button class="primary-btn" data-page="games">Начать играть <span>↗</span></button>
+          <div class="hero-symbol">R</div>
+        </div>
+
+        <div class="section-heading">
+          <div><span class="eyebrow">CHOOSE YOUR MODE</span><h2>Игры</h2></div>
+          <button class="text-btn" data-page="games">Все игры →</button>
+        </div>
+        <div class="games-grid">
+          <button class="game-card dice-card" data-game="dice"><span class="game-icon">🎲</span><strong>Dice</strong><small>Угадай число</small><span class="card-arrow">↗</span></button>
+          <button class="game-card mines-card" data-game="mines"><span class="game-icon">💣</span><strong>Mines</strong><small>Найди безопасные</small><span class="card-arrow">↗</span></button>
+          <button class="game-card upgrade-card" data-game="upgrade"><span class="game-icon">⚡</span><strong>Upgrade</strong><small>Испытай шанс</small><span class="card-arrow">↗</span></button>
+          <button class="game-card cow-card" data-game="cow"><span class="game-icon">🐮</span><strong>Коровка-ракетка</strong><small>Забери вовремя</small><span class="card-arrow">↗</span></button>
+        </div>
+
+        <div class="section-heading"><div><span class="eyebrow">DAILY REWARD</span><h2>Кейсы</h2></div></div>
+        <div class="case-list">
+          <div class="case-card daily-case"><div class="case-art">🎁</div><div class="case-info"><strong>Ежедневный кейс</strong><small>Бесплатно раз в 24 часа</small><span id="daily-timer">Можно открыть</span></div><button id="open-daily" class="small-btn">Открыть</button></div>
+          <div class="case-card"><div class="case-art purple">💜</div><div class="case-info"><strong>Neon Case</strong><small>Скоро в игре</small></div><span class="case-price">39 <i>R</i></span></div>
+          <div class="case-card"><div class="case-art blue">💎</div><div class="case-info"><strong>Crystal Case</strong><small>Скоро в игре</small></div><span class="case-price">49 <i>R</i></span></div>
+        </div>
+      </section>
+
+      <section class="page" id="page-games">
+        <div class="page-title"><span class="eyebrow">RUNEX ARCADE</span><h1>Выбирай игру</h1><p>Все игры работают в деморежиме.</p></div>
+        <div class="games-grid">
+          <button class="game-card dice-card" data-game="dice"><span class="game-icon">🎲</span><strong>Dice</strong><small>Угадай число</small><span class="card-arrow">↗</span></button>
+          <button class="game-card mines-card" data-game="mines"><span class="game-icon">💣</span><strong>Mines</strong><small>Найди безопасные</small><span class="card-arrow">↗</span></button>
+          <button class="game-card upgrade-card" data-game="upgrade"><span class="game-icon">⚡</span><strong>Upgrade</strong><small>Испытай шанс</small><span class="card-arrow">↗</span></button>
+          <button class="game-card cow-card" data-game="cow"><span class="game-icon">🐮</span><strong>Коровка-ракетка</strong><small>Забери вовремя</small><span class="card-arrow">↗</span></button>
+        </div>
+      </section>
+
+      <section class="page" id="page-dice">
+        <button class="back-btn" data-page="games">← Все игры</button>
+        <div class="game-header"><span class="big-game-icon">🎲</span><span class="eyebrow">GAME 01</span><h1>Dice</h1><p>Выбери число от 1 до 6.</p></div>
+        <div class="panel">
+          <label>Твоя ставка</label><div class="input-wrap"><input id="dice-bet" type="number" min="1" value="25"><span>R</span></div>
+          <label>Выбери число</label><div id="dice-options" class="number-options">
+            <button class="number-btn selected" data-number="1">1</button><button class="number-btn" data-number="2">2</button><button class="number-btn" data-number="3">3</button><button class="number-btn" data-number="4">4</button><button class="number-btn" data-number="5">5</button><button class="number-btn" data-number="6">6</button>
+          </div>
+          <button id="roll-dice" class="primary-btn full">Бросить кубик</button>
+          <div id="dice-result" class="result-box">🎲</div><p id="dice-message" class="message">Угадай число и попробуй удачу.</p>
+        </div>
+      </section>
+
+      <section class="page" id="page-mines">
+        <button class="back-btn" data-page="games">← Все игры</button>
+        <div class="game-header"><span class="big-game-icon">💣</span><span class="eyebrow">GAME 02</span><h1>Mines</h1><p>Открывай клетки, избегай мин.</p></div>
+        <div class="panel">
+          <label>Твоя ставка</label><div class="input-wrap"><input id="mines-bet" type="number" min="1" value="25"><span>R</span></div>
+          <label>Количество мин</label><select id="mine-count"><option value="3">3 мины</option><option value="5">5 мин</option><option value="8">8 мин</option><option value="12">12 мин</option></select>
+          <div class="mines-stats"><div><small>Множитель</small><strong id="mines-multiplier">x1.00</strong></div><div><small>Открыто</small><strong id="mines-count">0</strong></div></div>
+          <div id="mines-grid" class="mines-grid"></div>
+          <button id="start-mines" class="primary-btn full">Начать игру</button>
+          <button id="cashout-mines" class="secondary-btn full" disabled>Забрать выигрыш</button>
+          <p id="mines-message" class="message">Выбери ставку и начни игру.</p>
+        </div>
+      </section>
+
+      <section class="page" id="page-upgrade">
+        <button class="back-btn" data-page="games">← Все игры</button>
+        <div class="game-header"><span class="big-game-icon">⚡</span><span class="eyebrow">GAME 03</span><h1>Upgrade</h1><p>Рискни ради большего множителя.</p></div>
+        <div class="panel">
+          <div class="upgrade-visual"><span>R</span><div>⚡</div><span>R</span></div>
+          <label>Твоя ставка</label><div class="input-wrap"><input id="upgrade-bet" type="number" min="1" value="25"><span>R</span></div>
+          <label>Уровень риска</label><select id="upgrade-risk"><option value="low">Низкий риск · x1.5</option><option value="medium" selected>Средний риск · x2</option><option value="high">Высокий риск · x4</option></select>
+          <div class="mines-stats"><div><small>Шанс успеха</small><strong id="upgrade-chance">50%</strong></div><div><small>Возможный приз</small><strong id="upgrade-prize">50 R</strong></div></div>
+          <div class="chance-track"><div id="upgrade-chance-bar"></div></div>
+          <button id="run-upgrade" class="primary-btn full">Улучшить</button><p id="upgrade-message" class="message">Испытай удачу в деморежиме.</p>
+        </div>
+      </section>
+
+      <section class="page" id="page-cow">
+        <button class="back-btn" data-page="games">← Все игры</button>
+        <div class="game-header"><span class="big-game-icon">🐮</span><span class="eyebrow">GAME 04</span><h1>Коровка-ракетка</h1><p>Множитель растёт. Забери выигрыш вовремя!</p></div>
+        <div class="panel">
+          <div class="cow-arena"><div class="cow-stars">✦　✧　✦</div><div id="cow-character">🐮🚀</div><div class="cow-ground"></div><strong id="cow-multiplier">x1.00</strong></div>
+          <label>Твоя ставка</label><div class="input-wrap"><input id="cow-bet" type="number" min="1" value="25"><span>R</span></div>
+          <div class="progress-track"><div id="cow-progress"></div></div>
+          <button id="cow-start" class="primary-btn full">Запустить коровку</button>
+          <button id="cow-cashout" class="secondary-btn full" disabled>Забрать выигрыш</button>
+          <p id="cow-message" class="message">Готов к запуску?</p>
+        </div>
+      </section>
+
+      <section class="page" id="page-profile">
+        <div class="page-title"><span class="eyebrow">YOUR ACCOUNT</span><h1>Профиль</h1><p>Твой игровой профиль RUNEX.</p></div>
+        <div class="profile-card"><div class="avatar">R</div><div><strong id="profile-name">Игрок RUNEX</strong><small>DEMO ACCOUNT</small></div></div>
+        <div class="panel">
+          <label>Демо-баланс</label><div class="profile-balance"><span class="coin">R</span><strong id="profile-balance">1000</strong></div>
+          <p class="message">Баланс хранится только в этом браузере. Он не является реальными деньгами.</p>
+          <button id="reset-balance" class="secondary-btn full">Сбросить демобаланс</button>
+        </div>
+      </section>
+    </main>
+
+    <nav class="bottom-nav">
+      <button class="nav-item active" data-page="home"><span>⌂</span><small>Главная</small></button>
+      <button class="nav-item" data-page="games"><span>▦</span><small>Игры</small></button>
+      <button class="nav-item" data-page="profile"><span>◉</span><small>Профиль</small></button>
+    </nav>
+    <div id="toast" class="toast"></div>
+  </div>
+  <script src="./js/app.js"></script>
+</body>
+</html>
+
